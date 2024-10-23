@@ -1,3 +1,4 @@
+# SOURCE: MIT OCW ALGORITHMS LECTURE 9 and 10 -> use of dfs and queues to traverse non weighted graphs
 class City:
     def __init__(self,name,pop):
         self.name = name
@@ -6,7 +7,8 @@ class City:
     
     def edge(self, city2):
         self.connection.append(city2)
-    
+
+# create a hashmap for the graph traversal
 newMap = {}
 f = open("city_population.txt","r")
 for line in f:
