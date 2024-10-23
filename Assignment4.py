@@ -1,4 +1,6 @@
 # SOURCE: MIT OCW ALGORITHMS LECTURE 9 and 10 -> use of dfs and queues to traverse non weighted graphs
+
+# TASK 1
 class City:
     def __init__(self,name,pop):
         self.name = name
@@ -81,6 +83,16 @@ def minDistance(cities,A,B):
                 queue.append(adjacent, distance + 1)
     return -1
 
+# TASK 1 TEST CASES
+# newCity = City("Irvine", 307760)
+# newCity = City("Pasadena", 138699)
+# newCity = City("Vancouver", 662248)
+
+# TASK 3 TEST CASES
 # print(numIsland(newMap))
+
+# TASK 4 TEST CASES
 # print(islandPeople(newMap))
-print(minDistance(newMap, "Pacifica", "York"))
+
+# TASK 4 TEST CASES
+# print(minDistance(newMap, "Pacifica", "York"))
