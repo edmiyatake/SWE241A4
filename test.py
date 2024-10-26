@@ -27,6 +27,9 @@ for line in f:
     name2.edge(name1)
 f.close()
 
+# for city_name, city in newMap.items():
+#     print(city.name,city.population, city.connection)
+
 def numIsland(newMap):
     visited = set()
     numIslands = 0
@@ -64,10 +67,10 @@ def islandPeople(newMap):
     return numPeople
 
 def minDistance(cities,city1,city2):
-    A = cities.get(city1)
-    B = cities.get(city2)
+    A = newMap.get(city1)
+    B = newMap.get(city2)
     if not A or not B:
-        raise ValueError("One of those cities does not exist")
+        return -1
     if A == B:
         return 0
     visited = set()
@@ -75,7 +78,6 @@ def minDistance(cities,city1,city2):
 
     while queue:
         curr, distance = queue.pop(0)
-        # print(f"Visiting {curr.name}, distance: {distance}")
         if curr == B:
             return distance
         visited.add(curr)
@@ -84,59 +86,44 @@ def minDistance(cities,city1,city2):
                 queue.append((adjacent, distance + 1))
     return -1
 
-print("Testing Task 1")
-newCity1 = City("Irvine", 307760)
-newCity2 = City("Pasadena", 138699)
-newCity3 = City("Vancouver", 662248)
-print(f"Initializing city object {newCity1.name} with population: {newCity1.population}")
-print(f"Initializing city object {newCity2.name} with population: {newCity2.population}")
-print(f"Initializing city object {newCity3.name} with population: {newCity3.population}\n")
+newMap = {}
 
-print("Testing Task 3")
-print(f"The number of islands inside the hashmap is: {numIsland(newMap)}\n")
-
-print("Testing Task 4")
-print(f"The population on each island is {islandPeople(newMap)}\n")
-
-print("Testing Task 5")
-print(f"The minimum distance to reach Pacifica and York is: {minDistance(newMap, "Pacifica", "York")}\n")
-
-print("Custom testcases")
-print("Attempting to make a test where there is at least more than one island so I know the answer is right")
-
-testMap = {}
-testPopulation = [
-    "New York : 8405837",
-    "Los Angeles : 3884307",
-    "Chicago : 2718782",
-    "Houston : 2195914",
-    "Philadelphia : 1553165",
-    "Phoenix : 1513367",
-    "Arcadia : 1231233"
+# Simulating reading from files
+city_data = [
+    "cityA : 30000",
+    "cityB : 40000",
+    "cityC : 50000",
+    "cityD : 60000",
+    "cityE : 70000",
+    "cityF : 80000"
 ]
 
-testRoad = [
-    "New York : Los Angeles",
-    "Chicago : Houston",
-    "Philadelphia : Phoenix",
-    "Houston : Arcadia"
+road_data = [
+    "cityA : cityB",
+    "cityC : cityD",
+    "cityE : cityF"
 ]
 
-for line in testPopulation:
+# Populate the city map
+for line in city_data:
     name, pop = line.strip().split(" : ")
-    testMap[name] = City(name, int(pop))
+    newMap[name] = City(name, int(pop))
 
 # Create road connections
-for line in testRoad:
-    name1, name2 = line.strip().split(" : ")
-    city1 = testMap[name1]
-    city2 = testMap[name2]
+for line in road_data:
+    name1, name2 = line.strip().split(" : ", 1)  # Split only on the first occurrence
+    city1 = newMap[name1]
+    city2 = newMap[name2]
     city1.edge(city2)
     city2.edge(city1)
 
-print("Number of islands:", numIsland(testMap))
-print("Population of each island:", islandPeople(testMap)) 
+# Test the functions
+print("Number of islands:", numIsland(newMap))  # Expected output: 3
+print("Population of each island:", islandPeople(newMap))  # Expected output: [70000, 110000, 150000]
 
-print("Minimum distance from New York to Los Angeles:", minDistance(testMap, "New York", "Houston"))
-print("Minimum distance from New York to Chicago:", minDistance(testMap, "New York", "Chicago"))
-print("Minimum distance from Chicago to Arcadia:", minDistance(testMap, "Chicago", "Arcadia"))
+# Test minDistance function (example for cities in different islands)
+print("Minimum distance from City A to City B:", minDistance(newMap, "cityA", "cityB"))  
+print("Minimum distance from City A to City C:", minDistance(newMap, "cityA", "cityC"))
+
+# for city in newMap.values():
+#     print(city.name)
