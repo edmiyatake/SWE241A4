@@ -99,7 +99,8 @@ print("Testing Task 4")
 print(f"The population on each island is {islandPeople(newMap)}\n")
 
 print("Testing Task 5")
-print(f"The minimum distance to reach Pacifica and York is: {minDistance(newMap, "Pacifica", "York")}\n")
+result1 = minDistance(newMap, "Pacifica", "York")
+print(f"The minimum distance to reach Pacifica and York is: {result1}\n")
 
 print("Custom testcases")
 print("Attempting to make a test where there is at least more than one island so I know the answer is right")
